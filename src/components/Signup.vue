@@ -14,7 +14,7 @@
       <label for="pass">パスワード（6文字以上）</label><br>
       <input type="password" id="pass" v-model="password">
     </div>
-    <div class="signup-btn" @click="signUp">
+    <div class="signup-btn" @click="signUp" tabindex="0">
       登録
     </div>
     <p>
@@ -44,9 +44,6 @@ export default {
             })
         })
     }
-  },
-  mounted() {
-    console.log('signup mounted')
   }
 };
 </script>

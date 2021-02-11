@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 import "firebase/auth";
 import 'firebase/firestore';
 
-const firebaseApp = firebase.initializeApp({
+firebase.initializeApp({
   apiKey: "AIzaSyCAX1ZhH6RMhBzOjVhF7GXyFtl3hpiyCHY",
   authDomain: "vue-firestore-4f571.firebaseapp.com",
   projectId: "vue-firestore-4f571",

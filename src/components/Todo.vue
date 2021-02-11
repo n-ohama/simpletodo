@@ -1,10 +1,10 @@
 <template>
   <div class="todo">
     <h1 class="todo-title">SimpleTodo</h1>
-    <h2 class="todo-text">hogeさんのやることリスト</h2>
+    <h2 class="todo-text">{{ userName }} さんのやることリスト</h2>
     <Form />
     <Task />
-    <div class="todo-btn" @click="signOut">
+    <div class="todo-btn" @click="signOut" tabindex="0">
       サインアウト
     </div>
   </div>
@@ -19,34 +19,19 @@ export default {
   data() {
     return {
       tasks: [],
+      userName: null
     }
   },
   components: {
     Task,
     Form,
   },
-  methods: {
-    signOut: function() {
-      firebase.auth().signOut().then(() => {
-        this.$router.push('/signin')
-      })
-    }
-  },
   mounted() {
-    console.log('todo mounted')
-    // db.collection('users').doc(userId).collection('tasks').orderBy('createdAt')
-    // .onSnapshot((snapshot) => {
-    //   snapshot.docChanges().forEach((change) => {
-    //     const doc = change.doc
-    //     const index = this.tasks.findIndex(task => task.id === change.doc.id)
-    //     if (change.type === 'added') {
-    //       this.tasks.push({id: doc.id, ...doc.data()})
-    //     }
-    //     if (change.type === "removed") {
-    //       this.tasks.splice(index, 1)
-    //     }
-    //   })
-    // })
+    firebase.firestore().collection('users').doc(this.$store.state.user.uid)
+      .get().then(d=>this.userName = d.data().name)
+  },
+  methods: {
+    signOut: () => firebase.auth().signOut()
   },
 }
 </script>

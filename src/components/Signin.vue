@@ -12,7 +12,7 @@
       <br>
       <input type="password" id="pass" v-model="password">
     </div>
-    <div class="signin-btn" @click="signIn">
+    <div class="signin-btn" @click="signIn" tabindex="0">
       サインイン
     </div>
     <p>
@@ -38,9 +38,6 @@ export default {
           this.$router.push("/")
         })
     }
-  },
-  mounted() {
-    console.log('signin mounted')
   }
 };
 </script>

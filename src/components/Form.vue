@@ -1,8 +1,8 @@
 <template>
   <div class="input-container">
     <p class="form-text">タスクを追加！</p>
-    <textarea v-model="text"></textarea>
-    <div class="form-btn" @click="addTask">
+    <input type="text" v-model="text" />
+    <div class="form-btn" @click="addTask" tabindex="0">
       Add
     </div>
   </div>
@@ -18,13 +18,14 @@ export default {
   },
   methods: {
     addTask() {
-      firebase.firestore().collection('users').doc(this.$store.state.user.uid).collection('tasks').add({
-        text: this.text,
-        createdAt: new Date().getTime(),
-        isDone: false
-      }).then(doc => {
-        this.text = null
-      })
+      firebase.firestore().collection('users')
+        .doc(this.$store.state.user.uid).collection('tasks').add({
+          text: this.text,
+          createdAt: new Date().getTime(),
+          isDone: false
+        }).then(doc => {
+          this.text = null
+        })
     },
   }
 }
@@ -39,8 +40,9 @@ export default {
 .form-text {
   color: #fff;
 }
-textarea {
+input {
   width: 50%;
+  padding: .5rem;
   height: 100%;
   border: none;
 }
@@ -54,12 +56,12 @@ textarea {
   transition: .4s;
 }
 .form-btn:hover {
-  background: #fff;
+  background: #ffffff;
   color: #6DCB93;
 }
 @media screen and (max-width: 479px) {
-  textarea {
-    width: 100%;
+  input {
+    width: 90%;
   }
   .form-btn {
     width: 200px;
